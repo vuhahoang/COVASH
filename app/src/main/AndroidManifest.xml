@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.covash_demo">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.COVASHDEMO">
+        <activity android:name=".ChangePassword"></activity>
+        <activity
+            android:name=".NewsDetailsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NewsDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NewsActivity"
+            android:exported="true" />
+        <activity android:name=".Settings" />
+        <activity android:name=".PersonalInformation" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
+
+        <activity android:name=".ctdetail" />
+        <activity android:name=".NewDetail" />
+        <activity android:name=".ShareUs" />
+        <activity android:name=".CountryDashboard" />
+        <activity android:name=".CountrySwitchData" />
+        <activity android:name=".homepage" />
+        <activity android:name=".registerform" />
+        <activity android:name=".loginform" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

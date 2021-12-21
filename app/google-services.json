@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "39370662553",
+    "project_id": "login-register-havu",
+    "storage_bucket": "login-register-havu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39370662553:android:5c8ac539c006382c664e08",
+        "android_client_info": {
+          "package_name": "com.example.covash_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39370662553-lfu43d3oc3qe6q4ttss62v3gslu3s90q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmg9ER5JiRo_Al4wzTb0DQZxxXMrZ0jtA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39370662553-lfu43d3oc3qe6q4ttss62v3gslu3s90q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

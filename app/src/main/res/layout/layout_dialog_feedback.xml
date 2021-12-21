@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_white_corner_16">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send your feedback"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:background="@drawable/bg_blue_corner_16"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please send us your feedback"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your email"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            android:background="@drawable/bg_gray_corner_10"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your password"
+            android:padding="16dp"
+            android:inputType="textPassword"
+            android:background="@drawable/bg_gray_corner_10"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your feedback"
+            android:padding="16dp"
+            android:background="@drawable/bg_gray_corner_10"
+            android:layout_marginTop="10dp"/>
+        <RatingBar
+            android:id="@+id/ratingStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="1"
+            android:progressTint="@color/active"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+            <Button
+                android:id="@+id/dismiss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No, Thank you"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:layout_marginEnd="10dp"
+                android:alpha="0.4"
+                android:backgroundTint="@color/gray"
+                />
+            <Button
+                android:id="@+id/send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="Send"
+                android:layout_weight="1"
+                android:backgroundTint="@color/active"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
