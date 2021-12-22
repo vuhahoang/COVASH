@@ -36,6 +36,13 @@
         android:fontFamily="@font/antic"
         android:text="Sign in to Continue"
         android:textSize="18dp" />
+    <ProgressBar
+        android:id="@+id/loginPBLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

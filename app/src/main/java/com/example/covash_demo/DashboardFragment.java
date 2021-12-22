@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -52,6 +53,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class DashboardFragment extends Fragment {
@@ -132,8 +135,6 @@ public class DashboardFragment extends Fragment {
                dismiss = dialog.findViewById(R.id.dismiss);
                send = dialog.findViewById(R.id.send);
                ratingStar = dialog.findViewById(R.id.ratingStar);
-               email=dialog.findViewById(R.id.email);
-               password=dialog.findViewById(R.id.password);
                dismiss.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
@@ -151,7 +152,7 @@ public class DashboardFragment extends Fragment {
                                msg = "Sorry to hear that ! :(";
                                break;
                            case 2:
-                               msg = "You always accept your suggestions!";
+                               msg = "We always accept your suggestions!";
                                break;
                            case 3:
                                msg = "Good enough!";
@@ -169,11 +170,14 @@ public class DashboardFragment extends Fragment {
                send.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
-                       String eto = "phamq720@gmail.com";
+                       SharedPreferences sharedPreferences = getActivity().getSharedPreferences("taikhoan", Context.MODE_PRIVATE);
+                       String username = sharedPreferences.getString("taikhoan","");
+
+                       String eto = "vuhahoang2208@gmail.com";
                        String subject = String.valueOf(myRating);
                        String mess = feedback.getText().toString().trim();
-                       sEmail = email.getText().toString().trim();
-                       sPassword = password.getText().toString().trim();
+
+
 
                        Properties properties = new Properties();
                        properties.put("mail.smtp.auth","true");
@@ -185,14 +189,14 @@ public class DashboardFragment extends Fragment {
                        Session session = Session.getInstance(properties, new Authenticator() {
                            @Override
                            protected PasswordAuthentication getPasswordAuthentication() {
-                               return new PasswordAuthentication(sEmail,sPassword);
+                               return new PasswordAuthentication("nhunghongthinguyen2107@gmail.com","thecoa22");
                            }
                        });
                        try {
                            MimeMessage message = new MimeMessage(session);
-                           message.setFrom(new InternetAddress(sEmail));
+                           message.setFrom(new InternetAddress("nhunghongthinguyen2107@gmail.com"));
                            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(eto));
-                           message.setSubject("Xếp hạng : "+subject+" sao");
+                           message.setSubject(username + " xếp hạng : "+subject+" sao");
                            message.setText(mess);
                            new SendMail().execute(message);
                        }catch (MessagingException e){

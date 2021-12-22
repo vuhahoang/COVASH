@@ -18,6 +18,7 @@ import android.view.Window;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -38,6 +39,7 @@ public class loginform extends AppCompatActivity {
     CheckBox checkBox;
     SharedPreferences sharedpreferences;
     TextView test;
+    ProgressBar load;
 
 
     @Override
@@ -51,9 +53,8 @@ public class loginform extends AppCompatActivity {
         EdPassword = (TextInputLayout) findViewById(R.id.edpassworda);
         test = findViewById(R.id.tvtestthoi);
         checkBox = findViewById(R.id.remembercheckbox);
-        Intent k = getIntent();
-        EdUsername.getEditText().setText(k.getStringExtra("key1"));
-        EdPassword.getEditText().setText(k.getStringExtra("key2"));
+        load = findViewById(R.id.loginPBLoading);
+
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +111,7 @@ public class loginform extends AppCompatActivity {
     }
 
     private void isUser() {
+        load.setVisibility(View.VISIBLE);
         sharedpreferences = getSharedPreferences("taikhoan",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         final String userEnteredUsername = EdUsername.getEditText().getText().toString().trim();
@@ -132,6 +134,7 @@ public class loginform extends AppCompatActivity {
                         editor.commit();
                         Intent j = new Intent(loginform.this,homepage.class);
                         startActivity(j);
+                        load.setVisibility(View.GONE);
                     }else{
                         EdPassword.setError("Wrong password");
                         EdPassword.requestFocus();

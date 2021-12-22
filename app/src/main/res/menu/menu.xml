@@ -36,10 +36,7 @@
                 android:id="@+id/nav_share"
                 android:title="Share us"
                 android:icon="@drawable/ic_share"/>
-            <item
-                android:id="@+id/nav_rate"
-                android:title="Rate us"
-                android:icon="@drawable/ic_rate"/>
+
         </menu>
     </item>
 

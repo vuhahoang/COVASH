@@ -34,6 +34,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.covash_demo.Modle.UserHelperClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -172,6 +173,7 @@ public class PersonalInformation extends AppCompatActivity {
 
         if(requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK){
             imgUri = data.getData();
+            UploadImage(imgUri);
 
 
 
@@ -183,6 +185,42 @@ public class PersonalInformation extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void UploadImage(Uri uris){
+        ProgressDialog pd = new ProgressDialog(this);
+        pd.setTitle("UploadImage...");
+        pd.show();
+        sharedPreferences = getSharedPreferences("taikhoan",MODE_PRIVATE);
+        String username = sharedPreferences.getString("taikhoan","taikhoan");
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("images/" + username + ".jpg");
+
+        storageReference.putFile(uris)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                       pd.dismiss();
+                        Snackbar.make(findViewById(android.R.id.content),"Image Uploaded",Snackbar.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull  Exception e) {
+                        pd.dismiss();
+                        Toast.makeText(getApplicationContext(),"Failed to Upload",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        pd.setMessage("Progess: " + (int) progressPercent + "%");
+
+                    }
+                });
+
+
     }
 
 
@@ -221,11 +259,16 @@ public class PersonalInformation extends AppCompatActivity {
                     String country = snapshot.child(username).child("country").getValue(String.class);
                     String date = snapshot.child(username).child("date").getValue(String.class);
                     String sex = snapshot.child(username).child("sex").getValue(String.class);
-                    String male = (String) radioMale.getText();
-                    String female = (String) radioFeMale.getText();
-                    String other = (String) radioOther.getText();
 
-
+                    if(sex.equals(null)){
+                        radioMale.setChecked(false);
+                        radioFeMale.setChecked(false);
+                        radioOther.setChecked(false);
+                    }else if(sex.equals(radioMale.getText().toString())){
+                        radioMale.setChecked(true);
+                    }else if(sex.equals(radioFeMale.getText().toString())){
+                        radioFeMale.setChecked(true);
+                    }else radioOther.setChecked(true);
 
 
 
@@ -255,7 +298,7 @@ public class PersonalInformation extends AppCompatActivity {
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull  Exception e) {
-
+                                        load.setVisibility(View.GONE);
                                     }
                                 });
                     } catch (IOException e) {

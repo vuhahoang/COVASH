@@ -1,4 +1,4 @@
-package com.example.covash_demo;
+package com.example.covash_demo.Modle;
 
 public class UserHelperClass {
     String Name, Username , Email , Password , FullName, Number,Id,Country,Sex,Date;
@@ -41,11 +41,12 @@ public class UserHelperClass {
         Date = date;
     }
 
-    public UserHelperClass(String name, String username, String email, String password) {
+    public UserHelperClass(String name, String username, String email, String password,String sex) {
         Name = name;
         Username = username;
         Email = email;
         Password = password;
+        Sex = sex;
     }
 
     public String getName() {

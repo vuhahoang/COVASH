@@ -117,7 +117,7 @@ public class infoFragment extends Fragment {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            load.setVisibility(View.GONE);
                         }
                     });
         } catch (IOException e) {
@@ -125,5 +125,12 @@ public class infoFragment extends Fragment {
         }
 
 
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getInfo();
     }
 }

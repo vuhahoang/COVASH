@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.eazegraph.lib.charts.BarChart;
@@ -17,7 +18,7 @@ import org.eazegraph.lib.models.BarModel;
 public class CountryDashboard extends AppCompatActivity {
 
     BarChart barChart;
-    TextView tvCases,tvRecovered,tvCritical,tvActive,tvTodayCases,tvTotalDeaths,tvTodayDeaths,tvTest,tvCountries;
+    TextView tvCases,tvRecovered,tvCritical,tvActive,tvTodayCases,tvTotalDeaths,tvTodayDeaths,tvTest,tvCountries,tvHeaderC;
     private Context context;
     Button btnGlobaldata,btnCountryData;
     private String Country;
@@ -30,6 +31,7 @@ public class CountryDashboard extends AppCompatActivity {
     private String TotalDeaths;
     private String TodayDeaths;
     private String Test;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,8 @@ public class CountryDashboard extends AppCompatActivity {
         barChart = (BarChart) findViewById(R.id.barchartc);
         btnGlobaldata = (Button) findViewById(R.id.btnGlobalData);
         btnCountryData = (Button) findViewById(R.id.btnCountri);
+        tvHeaderC = findViewById(R.id.header_country);
+        back = findViewById(R.id.imgbackpresscountry);
 
         btnGlobaldata.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +70,19 @@ public class CountryDashboard extends AppCompatActivity {
                 startActivity(coun);
             }
         });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         loadCountryData();
     }
 
     private void loadCountryData() {
         tvCountries.setText("Static of "+ Country);
+        tvHeaderC.setText(Country);
         tvCases.setText(Cases);
         tvRecovered.setText(Recovored);
         tvCritical.setText(Critical);

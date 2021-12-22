@@ -8,7 +8,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -182,8 +184,35 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
             fragment = new infoFragment();
             bottomNavigation.show(4,true);
         }else if(item.getItemId() == R.id.nav_logout){
-            Intent i = new Intent(homepage.this,loginform.class);
-            startActivity(i);
+            fragment = new infoFragment();
+            bottomNavigation.show(4,true);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Do you sure about that ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("taikhoan", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.remove("taikhoan");
+                            editor.remove("matkhau");
+                            editor.remove("check");
+                            editor.apply();
+                            Intent i = new Intent(homepage.this,loginform.class);
+                            startActivity(i);
+                        }
+                    }).setNegativeButton("No", null);
+            builder.show();
+        }else if(item.getItemId() == R.id.nav_share){
+            fragment = new DashboardFragment();
+            bottomNavigation.show(1,true);
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            String shareBody = "Dowload my app now : -https://play.google/stores/apps/Covash_App.com";
+            String shareSub = "Covash App";
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT,shareSub);
+            shareIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
+            startActivity(Intent.createChooser(shareIntent,"Share with"));
         }
 
         loadfragment(fragment);
@@ -192,5 +221,11 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
     }
     private void loadfragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,fragment).commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getInfo();
     }
 }
