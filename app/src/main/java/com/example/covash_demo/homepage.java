@@ -71,6 +71,13 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
         View header = navigationView.getHeaderView(0);
         tvuser = header.findViewById(R.id.tvusernavi);
         imguser = header.findViewById(R.id.imgusernavi);
+        imguser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(homepage.this,PersonalInformation.class);
+                startActivity(i);
+            }
+        });
         getInfo();
 
 
@@ -133,7 +140,7 @@ public class homepage extends AppCompatActivity implements NavigationView.OnNavi
 
     public void getInfo(){
         sharedPreferences = getSharedPreferences("taikhoan", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("taikhoan","taikhoan");
+        String username = sharedPreferences.getString("taikhoan","đăng nhập để tiếc tục");
         tvuser.setText(username);
 
 

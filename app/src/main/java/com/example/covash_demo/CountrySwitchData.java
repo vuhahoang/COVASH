@@ -94,6 +94,7 @@ public class CountrySwitchData extends AppCompatActivity {
     private void FetchCountryWiseData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String apiURL = "https://disease.sh/v2/countries";
+        
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 apiURL,

@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -40,6 +41,7 @@ public class loginform extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     TextView test;
     ProgressBar load;
+
 
 
     @Override
@@ -131,6 +133,7 @@ public class loginform extends AppCompatActivity {
                         if (checkBox.isChecked()){
                             editor.putBoolean("check",true);
                         }
+                        editor.putBoolean("checklogin",true);
                         editor.commit();
                         Intent j = new Intent(loginform.this,homepage.class);
                         startActivity(j);
@@ -148,7 +151,8 @@ public class loginform extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull  DatabaseError error) {
-
+                Toast.makeText(loginform.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                load.setVisibility(View.GONE);
             }
         });
 

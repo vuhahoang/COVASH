@@ -157,15 +157,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_logout"
+                        android:src="@drawable/ic_login"
                         android:layout_gravity="center"
                         />
 
                     <TextView
+                        android:id="@+id/tvloginandout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="8"
-                        android:text="Log out"
+                        android:text="Log in"
                         android:textColor="@color/black"
                         android:textSize="22dp"
                         />

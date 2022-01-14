@@ -37,7 +37,7 @@ public class CountryDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_dashboard);
-        GetIntent();
+
 
 
         tvCountries = (TextView) findViewById(R.id.tvCountries);
@@ -54,6 +54,8 @@ public class CountryDashboard extends AppCompatActivity {
         btnCountryData = (Button) findViewById(R.id.btnCountri);
         tvHeaderC = findViewById(R.id.header_country);
         back = findViewById(R.id.imgbackpresscountry);
+        GetIntent();
+        loadCountryData();
 
         btnGlobaldata.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +79,7 @@ public class CountryDashboard extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        loadCountryData();
+
     }
 
     private void loadCountryData() {

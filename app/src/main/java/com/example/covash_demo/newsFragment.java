@@ -1,9 +1,7 @@
 package com.example.covash_demo;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.covash_demo.Adapter.CategoryAdapter;
+import com.example.covash_demo.Adapter.NewsAdapter;
 import com.example.covash_demo.Modle.Articles;
 import com.example.covash_demo.Modle.CategoryRVModel;
 import com.example.covash_demo.Modle.NewsModel;
@@ -111,6 +110,7 @@ public class newsFragment extends Fragment {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
 
+
         Call<NewsModel> call;
         if(keyword.length()>0){
             call = retrofitAPI.getNewsSearch(searchUrl);
@@ -120,6 +120,9 @@ public class newsFragment extends Fragment {
         }else {
             call = retrofitAPI.getNewsByCategory(categoryURL);
         }
+
+
+
 
         call.enqueue(new Callback<NewsModel>() {
             @Override

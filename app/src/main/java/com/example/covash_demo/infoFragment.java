@@ -37,6 +37,7 @@ public class infoFragment extends Fragment {
     ImageView imguser;
     TextView tvuser;
     ProgressBar load;
+    TextView tvlilo;
 
 
 
@@ -51,26 +52,64 @@ public class infoFragment extends Fragment {
         imguser = view.findViewById(R.id.imguser);
         tvuser = view.findViewById(R.id.tvusername);
         load = view.findViewById(R.id.infoPBLoading);
+        tvlilo = view.findViewById(R.id.tvloginandout);
+        sharedPreferences = getActivity().getSharedPreferences("taikhoan", Context.MODE_PRIVATE);
+        Boolean checklogin = sharedPreferences.getBoolean("checklogin",false);
+        if(checklogin){
+           tvlilo.setText("Logout");
+        }else
+            tvlilo.setText("Login");
         getInfo();
         linfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(),PersonalInformation.class);
-                startActivity(i);
+                if (!checklogin){
+                    Intent j = new Intent(getContext(),loginform.class);
+                    startActivity(j);
+
+                }else {
+                    Intent i = new Intent(getContext(), PersonalInformation.class);
+                    startActivity(i);
+                }
             }
         });
 
         lsetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(),Settings.class);
-                startActivity(i);
+                if (!checklogin){
+                    Intent j = new Intent(getContext(),loginform.class);
+                    startActivity(j);
+
+                }else {
+                    Intent i = new Intent(getContext(), Settings.class);
+                    startActivity(i);
+                }
+            }
+        });
+
+        imguser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checklogin){
+                    Intent j = new Intent(getContext(),loginform.class);
+                    startActivity(j);
+
+                }else {
+                    Intent i = new Intent(getContext(), PersonalInformation.class);
+                    startActivity(i);
+                }
             }
         });
 
         llogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!checklogin){
+                    Intent i = new Intent(getContext(),loginform.class);
+                    startActivity(i);
+
+                }else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("Do you sure about that ?")
                         .setCancelable(false)
@@ -83,11 +122,12 @@ public class infoFragment extends Fragment {
                                 editor.remove("matkhau");
                                 editor.remove("check");
                                 editor.apply();
-                                Intent i = new Intent(getContext(),loginform.class);
+                                Intent i = new Intent(getContext(),homepage.class);
                                 startActivity(i);
                             }
                         }).setNegativeButton("No", null);
                 builder.show();
+                }
             }
         });
         return view;
@@ -95,7 +135,7 @@ public class infoFragment extends Fragment {
     public void getInfo(){
         load.setVisibility(View.VISIBLE);
         sharedPreferences = getActivity().getSharedPreferences("taikhoan", Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("taikhoan","taikhoan");
+        String username = sharedPreferences.getString("taikhoan","Đăng nhập để tiếp tục");
         tvuser.setText(username);
 
 

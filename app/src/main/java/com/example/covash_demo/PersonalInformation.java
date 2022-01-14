@@ -244,7 +244,7 @@ public class PersonalInformation extends AppCompatActivity {
     public void getInfo(){
         load.setVisibility(View.VISIBLE);
         sharedPreferences = getSharedPreferences("taikhoan",MODE_PRIVATE);
-        String username = sharedPreferences.getString("taikhoan","taikhoan");
+        String username = sharedPreferences.getString("taikhoan","");
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("User");
         Query user = reference.orderByChild("username").equalTo(username);

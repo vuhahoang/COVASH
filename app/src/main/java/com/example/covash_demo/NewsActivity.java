@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.covash_demo.Adapter.CategoryAdapter;
+import com.example.covash_demo.Adapter.NewsAdapter;
 import com.example.covash_demo.Modle.Articles;
 import com.example.covash_demo.Modle.CategoryRVModel;
 import com.example.covash_demo.Modle.NewsModel;

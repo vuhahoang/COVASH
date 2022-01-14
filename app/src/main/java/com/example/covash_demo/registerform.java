@@ -1,5 +1,6 @@
 package com.example.covash_demo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -15,8 +16,12 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.covash_demo.Modle.UserHelperClass;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class  registerform extends AppCompatActivity {
     private Button signin;
@@ -34,6 +39,7 @@ public class  registerform extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +174,7 @@ public class  registerform extends AppCompatActivity {
            else {
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("User");
+
                 String name = EdName.getText().toString().trim();
                 String username = EdUsername.getText().toString().trim();
                 String email = EdEmail.getText().toString().trim();
@@ -175,20 +182,38 @@ public class  registerform extends AppCompatActivity {
                 int idradio = radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(idradio);
                 String sex = radioButton.getText().toString();
-                UserHelperClass user = new UserHelperClass(name, username, email, password, sex);
-                reference.child(username).setValue(user);
-                Intent i = new Intent(registerform.this, loginform.class);
-                startActivity(i);
-                Toast.makeText(context, "Register Success", Toast.LENGTH_SHORT).show();
-                SharedPreferences sharedPreferences = getSharedPreferences("taikhoan", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.remove("taikhoan");
-                editor.remove("matkhau");
-                editor.remove("check");
-                editor.apply();
-                editor.putString("taikhoan",username);
-                editor.putString("matkhau",password);
-                editor.commit();
+                Query checkUser = reference.orderByChild("username").equalTo(username);
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            EdUsername.setError("Username already exist");
+                        }else {
+                            UserHelperClass user = new UserHelperClass(name, username, email, password, sex);
+                            reference.child(username).setValue(user);
+                            Intent i = new Intent(registerform.this, loginform.class);
+                            startActivity(i);
+                            Toast.makeText(context, "Register Success", Toast.LENGTH_SHORT).show();
+                            SharedPreferences sharedPreferences = getSharedPreferences("taikhoan", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.remove("taikhoan");
+                            editor.remove("matkhau");
+                            editor.remove("check");
+                            editor.apply();
+                            editor.putString("taikhoan",username);
+                            editor.putString("matkhau",password);
+                            editor.commit();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
             }
     }
 }

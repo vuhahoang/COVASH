@@ -1,4 +1,4 @@
-package com.example.covash_demo;
+package com.example.covash_demo.Adapter;
 
 
 import android.content.Context;
@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covash_demo.Modle.Articles;
+import com.example.covash_demo.NewsDetailActivity;
+import com.example.covash_demo.R;
+import com.example.covash_demo.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
