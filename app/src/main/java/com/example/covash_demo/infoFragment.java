@@ -121,6 +121,7 @@ public class infoFragment extends Fragment {
                                 editor.remove("taikhoan");
                                 editor.remove("matkhau");
                                 editor.remove("check");
+                                editor.putBoolean("checklogin",false);
                                 editor.apply();
                                 Intent i = new Intent(getContext(),homepage.class);
                                 startActivity(i);
